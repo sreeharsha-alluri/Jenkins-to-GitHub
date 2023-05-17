@@ -23,8 +23,8 @@ jobs:
       shell: bash
       run: sudo docker run -td -p 8084:80 my-nginx-image
       working-directory: "/var/lib/jenkins/workspace/Pipeline3"
-  Check_IP:
-    name: Check IP
+  Checking_the_IP:
+    name: Checking the IP
     runs-on: ubuntu-latest
     needs: Building_and_Deploying_nginx
     steps:
