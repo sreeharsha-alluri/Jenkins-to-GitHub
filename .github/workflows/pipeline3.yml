@@ -8,15 +8,28 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v3.5.0
-#     # 'script' was not transformed because there is no suitable equivalent in GitHub Actions
-#     - name: script
-#       arguments:
-#       - key: scriptBlock
-#         value:
-#           isLiteral: true
-#           value: |-
-#             sh 'sudo rm -rf Jenkins*'
-#                                 sh 'git clone https://github.com/sreeharsha-alluri/Jenkins-to-GitHub.git'
-#                                 sh 'sudo docker build -t my-nginx-image -f ~/workspace/Pipeline3/Jenkins-to-GitHub/Dockerfile .'
-#                                 sh 'sudo docker run -td -p 8084:80 my-nginx-image'
-#                                 sh 'curl ifconfig.me'
+    - name: delete directory
+      shell: bash
+      run: rm -rf "`pwd`"
+    - name: checkout
+      uses: actions/checkout@v3.5.0
+      with:
+        repository: sreeharsha-alluri/Jenkins-to-GitHub
+    - name: sh
+      shell: bash
+      run: sudo docker build -t my-nginx-image -f Dockerfile .
+      working-directory: "/var/lib/jenkins/workspace/Pipeline3"
+    - name: sh
+      shell: bash
+      run: sudo docker run -td -p 8084:80 my-nginx-image
+      working-directory: "/var/lib/jenkins/workspace/Pipeline3"
+  Check_IP:
+    name: Check IP
+    runs-on: ubuntu-latest
+    needs: Building_and_Deploying_nginx
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3.5.0
+    - name: sh
+      shell: bash
+      run: curl ifconfig.me
