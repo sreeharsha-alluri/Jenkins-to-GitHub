@@ -19,3 +19,4 @@ jobs:
 #                                 sh 'git clone https://github.com/sreeharsha-alluri/Jenkins-to-GitHub.git'
 #                                 sh 'sudo docker build -t my-nginx-image -f ~/workspace/Pipeline3/Jenkins-to-GitHub/Dockerfile .'
 #                                 sh 'sudo docker run -td -p 8084:80 my-nginx-image'
+#                                 sh 'curl ifconfig.me'
