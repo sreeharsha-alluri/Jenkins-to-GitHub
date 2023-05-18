@@ -49,4 +49,12 @@ jobs:
       - name: Sleep for 100 seconds to view the NGINX webpage
         run: sleep 100
 
-     
+      - name: Ping NGINX container IP address
+        run: |
+          ping -c 1 $nginx_container_ip
+          if [ $? -eq 0 ]; then
+            echo "Ping successful (Status code: 200)"
+          else
+            echo "Ping failed"
+            exit 1
+          fi
