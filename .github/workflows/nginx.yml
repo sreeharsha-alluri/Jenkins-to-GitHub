@@ -50,4 +50,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show total number of Docker containers
-        run: docker ps -q | wc -l
+        run: docker ps 
