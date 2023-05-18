@@ -42,8 +42,8 @@ jobs:
         run: |
           curl ifconfig.me
 
-      - name: Sleep for 30 seconds to view web page
-        run: sleep 30
+      - name: Sleep for 100 seconds to view web page
+        run: sleep 10
 
   docker-ps:
     needs: build
