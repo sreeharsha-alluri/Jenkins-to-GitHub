@@ -13,13 +13,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Docker
-      uses: docker/setup-docker@v1
+      - name: Set up Docker
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+          sudo apt-get update
+          sudo apt-get -y install docker-ce docker-ce-cli containerd.io
 
-    - name: Build and run NGINX container
-      run: |
-        docker pull nginx
-        docker run -d -p 80:80 nginx
+      - name: Build and run NGINX container
+        run: |
+          docker pull nginx
+          docker run -d -p 80:80 nginx
