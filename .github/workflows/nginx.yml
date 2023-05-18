@@ -29,6 +29,9 @@ jobs:
         run: |
           docker pull nginx
           docker run -d -p 80:80 nginx
+      
+      - name: Show total number of Docker containers
+        run: docker ps
 
       - name: Show NGINX container IP address and port
         run: |
@@ -42,3 +45,8 @@ jobs:
 
       - name: Sleep for 10 seconds to allow NGINX to start
         run: sleep 10
+
+      - name: Sleep for 100 seconds to view the NGINX webpage
+        run: sleep 100
+
+     
