@@ -16,14 +16,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker
+      - name: Set up Docker and ngrok
         run: |
           sudo apt-get update
           sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
           curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
           echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
           sudo apt-get update
-          sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+          sudo apt-get -y install docker-ce docker-ce-cli containerd.io ngrok
 
       - name: Build and run NGINX container
         run: |
@@ -40,8 +40,8 @@ jobs:
           public_ip=$(curl ifconfig.me)
           echo "Public IP address: $public_ip"
 
-      - name: Sleep for 10 seconds to allow NGINX to start
-        run: sleep 10
+      - name: Sleep for 100 seconds to allow NGINX to start
+        run: sleep 100
 
       - name: View NGINX webpage
         run: |
