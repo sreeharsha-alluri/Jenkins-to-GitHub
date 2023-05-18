@@ -30,16 +30,20 @@ jobs:
           docker pull nginx
           docker run -d -p 80:80 nginx
 
-      - name: Sleep for 100 seconds
-        run: sleep 100
-
   debug:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Show NGINX container IP address
+      - name: Show NGINX container IP address and port
         run: |
-          docker ps -q --filter ancestor=nginx | xargs -I{} docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' {}
+          docker ps -q --filter ancestor=nginx | xargs -I{} sh -c "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}:{{.HostConfig.PortBindings}}' {}"
+
+      - name: Get public IP address
+        run: |
+          curl ifconfig.me
+
+      - name: Sleep for 30 seconds to view web page
+        run: sleep 30
 
   docker-ps:
     needs: build
