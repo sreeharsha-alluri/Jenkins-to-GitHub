@@ -16,10 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Get IP address
-        run: |
-          echo "IP address: $(curl ifconfig.me)"
-
       - name: Set up Docker
         run: |
           sudo apt-get update
@@ -33,19 +29,6 @@ jobs:
         run: |
           docker pull nginx
           docker run -d -p 80:80 nginx
-          sleep 150
 
-      - name: Show NGINX container logs
-        run: |
-          sleep 5  # Wait for the container to start
-          docker ps -a  # Check if the container is running
-          
-
-      - name: Show NGINX webpage URL
-        run: |
-          echo "NGINX webpage URL: http://$(curl -s ifconfig.me):80"
-
-      - name: Troubleshoot NGINX access
-        run: |
-          sudo ufw status  # Check if there's a firewall blocking access
-          curl -I http://localhost  # Test accessing NGINX from within the same machine
+      - name: Sleep for 30 seconds
+        run: sleep 30
