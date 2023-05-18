@@ -29,3 +29,6 @@ jobs:
         run: |
           docker pull nginx
           docker run -d -p 80:80 nginx
+
+      - name: Sleep for 100 seconds
+        run: sleep 100
