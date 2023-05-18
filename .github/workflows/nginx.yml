@@ -15,7 +15,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
+      - name: getting IP address
+        run: |
+          curl ifconfig.me
       - name: Set up Docker
         run: |
           sudo apt-get update
