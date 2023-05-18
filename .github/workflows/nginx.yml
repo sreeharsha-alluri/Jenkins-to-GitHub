@@ -33,6 +33,7 @@ jobs:
         run: |
           docker pull nginx
           docker run -d -p 80:80 nginx
+          sleep 150
 
       - name: Show NGINX container logs
         run: |
