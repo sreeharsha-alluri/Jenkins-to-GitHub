@@ -43,8 +43,8 @@ jobs:
           public_ip=$(curl ifconfig.me)
           echo "Public IP address: $public_ip"
 
-      - name: Sleep for 10 seconds to allow Apache2 to start
-        run: sleep 10
+      - name: Sleep for 15 seconds to allow Apache2 to start
+        run: sleep 15
 
       - name: Sleep for 100 seconds to view the Apache2 webpage
         run: sleep 100
